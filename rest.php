@@ -29,7 +29,7 @@
 			}
 
 			$data = json_decode($this->request, true);
-
+			
 			if(!isset($data['name']) || $data['name'] == "") {
 				$this->throwError(API_NAME_REQUIRED, "API name is required.");
 			}
@@ -83,11 +83,11 @@
 				$stmt->execute();
 				$user = $stmt->fetch(PDO::FETCH_ASSOC);
 				if(!is_array($user)) {
-					$this->returnResponse(INVALID_USER_PASS, "This user is not found in our database.");
+					$this->returnResponse(INVALID_USER_PASSWORD, "This user is not found in our database.");
 				}
 
-				if( $user['active'] == 0 ) {
-					$this->returnResponse(USER_NOT_ACTIVE, "This user may be decactived. Please contact to admin.");
+				if( $user['is_active'] == 0 ) {
+					$this->returnResponse(USER_NOT_ACTIVE, "This user may be desactived. Please contact to admin.");
 				}
 				$this->userId = $payload->userId;
 			} catch (Exception $e) {
@@ -122,7 +122,7 @@
 		}
 
 		/**
-	    * Get hearder Authorization
+	    * Get header Authorization
 	    * */
 	    public function getAuthorizationHeader(){
 	        $headers = null;
@@ -155,4 +155,3 @@
 	        $this->throwError( ATHORIZATION_HEADER_NOT_FOUND, 'Access Token Not found');
 	    }
 	}
- ?>
