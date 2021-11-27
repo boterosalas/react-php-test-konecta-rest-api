@@ -92,6 +92,17 @@ class Api extends Rest
 		$this->returnResponse(SUCCESS_RESPONSE, $response);
 	}
 
+	public function getAllUsers()
+	{
+		$user = new User;
+		$userResponse = $user->getAllUsers();
+		if (!is_array($userResponse)) {
+			$this->returnResponse(SUCCESS_RESPONSE, ['message' => 'Customer details not found.']);
+		}
+
+		$this->returnResponse(SUCCESS_RESPONSE, $userResponse);
+	}
+
 	public function updateUser()
 	{
 
@@ -129,14 +140,14 @@ class Api extends Rest
 		$this->returnResponse(SUCCESS_RESPONSE, $message);
 	}
 
-	public function deleteCustomer()
+	public function deleteUser()
 	{
-		$customerId = $this->validateParameter('customerId', $this->param['customerId'], INTEGER);
+		$userId = $this->validateParameter('userId', $this->param['id'], INTEGER);
 
-		$cust = new Customer;
-		$cust->setId($customerId);
+		$user = new User;
+		$user->setId($userId);
 
-		if (!$cust->delete()) {
+		if (!$user->deactiveUser()) {
 			$message = 'Failed to delete.';
 		} else {
 			$message = "deleted successfully.";
