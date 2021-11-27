@@ -10,7 +10,7 @@ const Navbar = props => {
     const { dispatch } = useContext(AuthContext);
 
 
-    const handleLogOut = () =>{
+    const handleLogOut = () => {
         const action = {
             type: types.logout
         }
@@ -27,9 +27,6 @@ const Navbar = props => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <NavLink activeClassName="active" to="/login" className="nav-link">Login</NavLink>
-                        </li>
                         <li className="nav-item">
                             <NavLink activeClassName="active" to="/users" className="nav-link">Users</NavLink>
                         </li>

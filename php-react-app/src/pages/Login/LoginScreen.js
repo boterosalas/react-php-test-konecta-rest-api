@@ -20,7 +20,8 @@ const LoginScreen = props => {
             }
         }
         dispatch(action);
-        navigate.replace('/')
+        const lastPath = localStorage.getItem('lastPath') || '/';
+        navigate.replace(lastPath);
     }
 
 
